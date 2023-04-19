@@ -1,1 +1,0 @@
-export { canCreatePostType } from "./template";

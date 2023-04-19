@@ -99,23 +99,33 @@ passport.use(
         const email = emails[0].value;
         const user = await UserModel.findOne({ email });
         if (user) {
-          return done(null, false, {
-            message: "This email is already registered.",
+          // User already exists, return JWT
+          const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+            expiresIn: "1h",
+          });
+          return done(null, {
+            user: {
+              email: user.email,
+            },
+            token,
           });
         }
+        // User does not exist, create a new user and return JWT
         const newUser = await UserModel.create({
-          name,
           email,
           password: "12312312",
           type: "social",
           network: "google",
         });
-        // Generate JWT token here
-        const token = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET, {
+        const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
           expiresIn: "1h",
         });
-        // Return user and token in the response
-        return done(null, { newUser, token });
+        return done(null, {
+          user: {
+            email: newUser.email,
+          },
+          token,
+        });
       } catch (error) {
         return done(error);
       }

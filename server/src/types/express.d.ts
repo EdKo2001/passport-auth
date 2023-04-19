@@ -1,17 +1,13 @@
 import { Schema } from "mongoose";
 
-import { ROLES } from "../constants";
-
-declare global {
-  namespace Express {
-    interface Request {
-      user: {
-        id?: Schema.Types.ObjectId;
-        role?: ROLES;
+declare module "express" {
+  export interface Request {
+    user: {
+      id?: Schema.Types.ObjectId;
+      token?: string;
+      user?: {
+        email: string;
       };
-    }
-    interface Response {
-      paginate: any;
-    }
+    };
   }
 }
