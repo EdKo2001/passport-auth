@@ -11,53 +11,15 @@ const Login = () => {
   const dispatch = useDispatch();
   const google = () => {
     const googleAuthUrl = `${process.env.REACT_APP_API_URL}/auth/google`;
-    const googleAuthWindow = window.open(
-      googleAuthUrl,
-      "_blank",
-      "width=500, height=600"
-    );
+    window.open(googleAuthUrl, "_blank", "width=500, height=600");
 
-    if (googleAuthWindow) {
-      const timer = setInterval(async () => {
-        if (googleAuthWindow.closed) {
-          const getUser = async () => {
-            try {
-              const response = await axios.get("/auth/login/success");
-
-              if (response.status === 200) {
-                return response.data.user;
-              } else {
-                console.error("Authentication failed!");
-              }
-            } catch (err) {
-              console.log(err);
-              throw err;
-            }
-          };
-          try {
-            const user = await getUser();
-            if (user) {
-              const { displayName, photos, provider, emails } = user;
-              console.log("user", user);
-              dispatch(setAuth(Object.keys(user).length > 0));
-              dispatch(
-                setUserData({
-                  displayName,
-                  photos,
-                  provider,
-                  email: emails[0].value,
-                })
-              );
-            }
-          } catch (err) {
-            console.log(err);
-            throw err;
-          }
-
-          if (timer) clearInterval(timer);
-        }
-      }, 500);
-    }
+    window.addEventListener("userData", (e) => {
+      const userData = e.detail;
+      localStorage.setItem("token", userData.token);
+      dispatch(setAuth(true));
+      dispatch(setToken(userData.token));
+      dispatch(setUserData(userData.user));
+    });
   };
 
   const facebook = () => {};
@@ -83,7 +45,7 @@ const Login = () => {
         const token = res.data.token;
         localStorage.setItem("token", token);
         dispatch(setToken(token));
-        dispatch(setAuth(Object.keys(user).length > 0));
+        dispatch(setAuth(true));
         dispatch(setUserData({ email: user.email }));
       })
       .catch((err) => console.error(err));
@@ -99,7 +61,7 @@ const Login = () => {
         const token = res.data.token;
         localStorage.setItem("token", token);
         dispatch(setToken(token));
-        dispatch(setAuth(Object.keys(user).length > 0));
+        dispatch(setAuth(true));
         dispatch(
           setUserData({
             email: user.email,

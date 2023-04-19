@@ -9,7 +9,6 @@ const register = (req: Request, res: Response, next: NextFunction) => {
     "register",
     { session: false },
     (err: Error, user: IUser, info: any) => {
-      console.log(info, err, user);
       if (err) {
         return next(err);
       }

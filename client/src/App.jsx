@@ -12,8 +12,8 @@ import axios from "./utils/axios.jsx";
 import Home from "./pages/Home";
 import Post from "./pages/Post";
 import Login from "./pages/Login";
+import LoginSuccess from "./pages/LoginSuccess";
 
-import LoginSuccess from "./components/LoginSuccess";
 import Navbar from "./components/Navbar";
 
 import { setAuth, setToken, setUserData } from "./features/auth/authSlice";
@@ -26,7 +26,6 @@ const App = () => {
 
   useEffect(() => {
     const getUser = async () => {
-      console.log(localStorage.getItem("token"));
       await axios
         .get("/auth/user", {
           headers: {
@@ -38,29 +37,28 @@ const App = () => {
             throw new Error("Authentication has been failed!");
           const user = res.data.user;
           const token = res.data.token;
-          const { displayName, photos, provider, email, emails } = user;
+          const { email } = user;
           dispatch(setToken(token));
-          dispatch(setAuth(Object.keys(user).length > 0));
+          dispatch(setAuth(true));
           dispatch(
             setUserData({
-              displayName,
-              photos,
-              provider,
-              email: email ?? emails[0].value,
+              email,
             })
           );
         })
         .catch((err) => {
-          console.log(err);
+          console.error(err);
         });
     };
     getUser();
-  }, []);
+  }, [dispatch]);
 
   return (
     <Router>
       <div>
-        <Navbar user={userData} />
+        {window.location.pathname !== "/login/success" && (
+          <Navbar user={userData} />
+        )}
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route

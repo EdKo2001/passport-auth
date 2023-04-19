@@ -20,8 +20,6 @@ const Navbar = ({ user }) => {
     }
   };
 
-  console.log("123", user);
-
   return (
     <div className="navbar">
       <span className="logo">

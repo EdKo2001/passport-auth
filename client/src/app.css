@@ -1,5 +1,6 @@
+/* Navbar */
 .navbar {
-  height: 50px;
+  height: 3.125rem;
   background-color: rgba(102, 16, 83, 0.698);
   color: white;
   display: flex;
@@ -8,7 +9,7 @@
 }
 
 .logo {
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: bold;
 }
 
@@ -19,57 +20,60 @@
 }
 
 .listItem {
-  margin-right: 20px;
+  margin-right: 1.25rem;
   font-weight: 500;
   cursor: pointer;
 }
 
+/* Avatar */
 .avatar {
-  width: 32px !important;
-  height: 32px !important;
+  width: 2rem !important;
+  height: 2rem !important;
   border-radius: 50%;
   object-fit: cover;
 }
 
+/* Home */
 .home {
   display: flex;
-  padding: 50px 100px;
+  padding: 3.125rem 6.25rem;
   justify-content: space-between;
   flex-wrap: wrap;
 }
 
 .card {
   width: 30%;
-  padding: 10px;
-  border-radius: 20px;
-  -webkit-box-shadow: 0px 5px 33px -21px rgba(66, 68, 90, 1);
-  -moz-box-shadow: 0px 5px 33px -21px rgba(66, 68, 90, 1);
-  box-shadow: 0px 5px 33px -21px rgba(66, 68, 90, 1);
+  padding: 0.625rem;
+  border-radius: 1.25rem;
+  -webkit-box-shadow: 0rem 0.3125rem 2.0625rem -1.3125rem rgba(66, 68, 90, 1);
+  -moz-box-shadow: 0rem 0.3125rem 2.0625rem -1.3125rem rgba(66, 68, 90, 1);
+  box-shadow: 0rem 0.3125rem 2.0625rem -1.3125rem rgba(66, 68, 90, 1);
 }
 
 .img {
   width: 100%;
-  height: 200px;
+  height: 12.5rem;
   object-fit: cover;
-  margin: 20px 0px;
+  margin: 1.25rem 0rem;
 }
 
 .desc {
   color: #333;
-  margin-bottom: 20px;
-  line-height: 25px;
+  margin-bottom: 1.25rem;
+  line-height: 1.5625rem;
 }
 
 .cardButton {
   border: none;
-  border-radius: 10px;
+  border-radius: 0.625rem;
   background-color: rgba(53, 16, 102, 0.678);
-  padding: 10px;
+  padding: 0.625rem;
   color: white;
   font-weight: bold;
   cursor: pointer;
 }
 
+/* Post */
 .post {
   display: flex;
   flex-direction: column;
@@ -78,28 +82,29 @@
 
 .postImg {
   width: 100%;
-  height: 300px;
+  height: 18.75rem;
   object-fit: cover;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
 }
 
 .postDesc {
-  padding: 0 100px;
-  font-size: 24px;
+  padding: 0 6.25rem;
+  font-size: 1.5rem;
   font-weight: 300;
   color: gray;
-  margin-top: 50px;
+  margin-top: 3.125rem;
 }
 
 .postLongDesc {
-  padding: 100px;
-  padding-top: 50px;
-  font-size: 18px;
-  line-height: 24px;
+  padding: 6.25rem;
+  padding-top: 3.125rem;
+  font-size: 1.125rem;
+  line-height: 1.5rem;
 }
 
+/* Login */
 .login {
-  height: calc(100vh - 50px);
+  height: calc(100vh - 3.125rem);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -108,12 +113,12 @@
 .wrapper {
   width: 60%;
   height: 75%;
-  -webkit-box-shadow: 0px 5px 33px -21px rgba(66, 68, 90, 1);
-  -moz-box-shadow: 0px 5px 33px -21px rgba(66, 68, 90, 1);
-  box-shadow: 0px 5px 33px -21px rgba(66, 68, 90, 1);
+  -webkit-box-shadow: 0rem 0.3125rem 2.0625rem -1.3125rem rgba(66, 68, 90, 1);
+  -moz-box-shadow: 0rem 0.3125rem 2.0625rem -1.3125rem rgba(66, 68, 90, 1);
+  box-shadow: 0rem 0.3125rem 2.0625rem -1.3125rem rgba(66, 68, 90, 1);
   display: flex;
   align-items: center;
-  border-radius: 20px;
+  border-radius: 1.25rem;
 }
 
 .left,
@@ -133,16 +138,16 @@
 }
 
 .or {
-  border: 2px solid lightgray;
+  border: 0.125rem solid lightgray;
   border-radius: 50%;
-  padding: 10px;
+  padding: 0.625rem;
   color: gray;
   background-color: white;
   font-weight: bold;
 }
 
 .line {
-  width: 0.5px;
+  width: 0.03125rem;
   height: 70%;
   background-color: lightgray;
   position: absolute;
@@ -155,33 +160,36 @@
 }
 
 .loginButton {
-  width: 150px;
-  padding: 15px 25px;
-  border-radius: 5px;
+  width: 9.375rem;
+  padding: 0.9375rem 1.5625rem;
+  border-radius: 0.3125rem;
   color: white;
   display: flex;
   align-items: center;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
   cursor: pointer;
 }
 
 .google {
   background-color: #df4930;
 }
+
 .facebook {
   background-color: #507cc0;
 }
+
 .github {
   background-color: black;
 }
 
 .icon {
-  width: 20px;
-  height: 20px;
-  margin-right: 10px;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-right: 0.625rem;
 }
 
+/* Form */
 form {
   display: flex;
   flex-direction: column;
@@ -189,37 +197,39 @@ form {
 }
 
 input {
-  width: 200px;
-  padding: 15px 20px;
-  margin-bottom: 20px;
+  width: 12.5rem;
+  padding: 0.9375rem 1.25rem;
+  margin-bottom: 1.25rem;
 }
 
 .submit {
-  width: 200px;
+  width: 12.5rem;
   background-color: rgba(128, 0, 128, 0.671);
   color: white;
   font-weight: bold;
   border: none;
-  padding: 15px 20px;
-  border-radius: 5px;
+  padding: 0.9375rem 1.25rem;
+  border-radius: 0.3125rem;
   cursor: pointer;
 }
 
 .loginTitle {
   position: absolute;
-  top: 150px;
+  top: 9.375rem;
   color: lightgray;
 }
 
+/* Link */
 .link {
   color: inherit;
   text-decoration: none;
 }
 
-@media screen and (max-width: 992px) {
+/* Media Queries */
+@media (max-width: 62rem) {
   .card {
     width: 100%;
-    margin-bottom: 50px;
+    margin-bottom: 3.125rem;
   }
 
   .wrapper {
@@ -238,15 +248,16 @@ input {
   }
 
   .left {
-    padding: 20px;
+    padding: 1.25rem;
   }
 
   .right {
-    padding: 20px;
+    padding: 1.25rem;
   }
 
   .line {
-    height: 0.5px;
-    width: 300px;
+    height: 0.03125rem;
+    width: 100%;
+    max-width: 18.75rem;
   }
 }

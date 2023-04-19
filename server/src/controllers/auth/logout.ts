@@ -5,7 +5,7 @@ const logout = async (req: Request, res: Response) => {
     // req.logout(() => {});
     res.status(204).json();
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.status(503).json({
       message: "Failed to logout",
     });

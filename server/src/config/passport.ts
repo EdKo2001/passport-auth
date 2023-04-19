@@ -20,6 +20,7 @@ passport.use(
           return done(null, false, { message: "Incorrect email or password" });
         }
         const isMatch = await user.verifyPassword(password);
+        console.log(isMatch, password);
         if (!isMatch) {
           return done(null, false, { message: "Incorrect email or password" });
         }

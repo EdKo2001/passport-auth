@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 
 const success = async (req: Request, res: Response) => {
-  console.log(req.user, req.isAuthenticated());
   if (req.user) {
     res.status(200).json({
       success: true,
