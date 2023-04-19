@@ -1,0 +1,24 @@
+Best practice: 
+
+1) Install jwt-redis from npm
+
+2) To Create -
+
+var redis = require('redis');
+var JWTR =  require('jwt-redis').default;
+var redisClient = redis.createClient();
+var jwtr = new JWTR(redisClient);
+
+jwtr.sign(payload, secret)
+    .then((token)=>{
+            // your code
+    })
+    .catch((error)=>{
+            // error handling
+    });
+3) To verify -
+
+jwtr.verify(token, secret);
+4) To Destroy -
+
+jwtr.destroy(token)
