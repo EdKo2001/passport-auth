@@ -100,6 +100,11 @@ passport.use(
         const email = emails[0].value;
         const user = await UserModel.findOne({ email });
         if (user) {
+          if (!user.isApproved) {
+            return done(null, false, {
+              message: "Please confirm your registration.",
+            });
+          }
           // User already exists, return JWT
           const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
             expiresIn: "1h",

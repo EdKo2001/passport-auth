@@ -15,6 +15,11 @@ const login = (req: Request, res: Response, next: NextFunction) => {
       if (!user) {
         return res.status(401).json({ message: info.message });
       }
+      if (!user.isApproved) {
+        return res
+          .status(401)
+          .json({ message: "Please confirm your registration." });
+      }
       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
         expiresIn: "1h",
       });

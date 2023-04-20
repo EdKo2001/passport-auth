@@ -8,6 +8,7 @@ export interface IUser extends Document {
   password: string;
   type: AUTH_TYPE;
   provider?: PROVIDER_TYPE;
+  isApproved: boolean;
   verifyPassword(password: string): boolean;
 }
 
@@ -37,6 +38,13 @@ const UserSchema = new Schema<IUser>(
       enum: Object.values(PROVIDER_TYPE),
       required: function () {
         return this.type === AUTH_TYPE.SOCIAL;
+      },
+    },
+    isApproved: {
+      type: Boolean,
+      required: true,
+      default: function () {
+        return this.type !== AUTH_TYPE.MANUAL;
       },
     },
   },

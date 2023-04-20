@@ -14,6 +14,8 @@ const googleAuth = passport.authenticate("google", {
 });
 const googleCallback = passport.authenticate("google", {
   session: false,
+  failureRedirect:
+    "http://localhost:3000/register/error?text=Please confirm your registration.",
 });
 
 const facebookAuth = passport.authenticate("facebook");
@@ -42,6 +44,8 @@ router.post(
   authController.register
 );
 
+router.post("/register/confirm", authController.confirm);
+
 router.post(
   "/login",
   authValidation,
@@ -52,10 +56,6 @@ router.post(
 router.get("/user", authController.user);
 
 router.all("/login/success", (req, res, next) => {
-  res.status(405).json("Method Not Allowed");
-});
-
-router.all("/login/failed", (req, res, next) => {
   res.status(405).json("Method Not Allowed");
 });
 
@@ -80,6 +80,10 @@ router.all("/facebook/callback", (req, res, next) => {
 });
 
 router.all("/register", (req, res, next) => {
+  res.status(405).json("Method Not Allowed");
+});
+
+router.all("/register/confirm", (req, res, next) => {
   res.status(405).json("Method Not Allowed");
 });
 

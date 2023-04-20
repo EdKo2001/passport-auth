@@ -6,6 +6,7 @@ import facebook from "./facebook";
 import register from "./register";
 import login from "./login";
 import user from "./user";
+import confirm from "./confirm";
 
 const authController = {
   logout,
@@ -16,6 +17,7 @@ const authController = {
   register,
   login,
   user,
+  confirm,
 };
 
 export default authController;
