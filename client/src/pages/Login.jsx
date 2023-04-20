@@ -22,7 +22,19 @@ const Login = () => {
     });
   };
 
-  const facebook = () => {};
+  const facebook = () => {
+    const facebookAuthUrl = `${process.env.REACT_APP_API_URL}/auth/facebook`;
+    window.open(facebookAuthUrl, "_blank", "width=500, height=600");
+
+    window.addEventListener("userData", (e) => {
+      const userData = e.detail;
+      console.log(userData);
+      localStorage.setItem("token", userData.token);
+      dispatch(setAuth(true));
+      dispatch(setToken(userData.token));
+      dispatch(setUserData(userData.user));
+    });
+  };
 
   const [formData, setFormData] = useReducer(
     (prev, next) => {

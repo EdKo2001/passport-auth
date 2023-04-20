@@ -7,6 +7,8 @@ import jwt from "jsonwebtoken";
 
 import { IUser, UserModel } from "../models";
 
+import { AUTH_TYPE, PROVIDER_TYPE } from "../constants";
+
 passport.use(
   new LocalStrategy(
     {
@@ -20,11 +22,9 @@ passport.use(
           return done(null, false, { message: "Incorrect email or password" });
         }
         const isMatch = await user.verifyPassword(password);
-        console.log(isMatch, password);
         if (!isMatch) {
           return done(null, false, { message: "Incorrect email or password" });
         }
-
         return done(null, user);
       } catch (err) {
         return done(err);
@@ -114,9 +114,8 @@ passport.use(
         // User does not exist, create a new user and return JWT
         const newUser = await UserModel.create({
           email,
-          password: "12312312",
-          type: "social",
-          network: "google",
+          type: AUTH_TYPE.SOCIAL,
+          provider: PROVIDER_TYPE.GOOGLE,
         });
         const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
           expiresIn: "1h",
@@ -134,18 +133,52 @@ passport.use(
   )
 );
 
-// passport.use(
-//   new FacebookStrategy(
-//     {
-//       clientID: process.env.FACEBOOK_APP_ID,
-//       clientSecret: process.env.FACEBOOK_APP_SECRET,
-//       callbackURL: process.env.FACEBOOK_CALLBACK_URL,
-//     },
-//     function (accessToken, refreshToken, profile, done) {
-//       done(null, profile);
-//     }
-//   )
-// );
+passport.use(
+  new FacebookStrategy(
+    {
+      clientID: process.env.FACEBOOK_APP_ID,
+      clientSecret: process.env.FACEBOOK_APP_SECRET,
+      callbackURL: process.env.FACEBOOK_CALLBACK_URL,
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        console.log(profile);
+        const { name, emails } = profile;
+        const email = emails[0].value;
+        const user = await UserModel.findOne({ email });
+        if (user) {
+          // User already exists, return JWT
+          const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+            expiresIn: "1h",
+          });
+          return done(null, {
+            user: {
+              email: user.email,
+            },
+            token,
+          });
+        }
+        // User does not exist, create a new user and return JWT
+        const newUser = await UserModel.create({
+          email,
+          type: AUTH_TYPE.SOCIAL,
+          provider: PROVIDER_TYPE.GOOGLE,
+        });
+        const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
+          expiresIn: "1h",
+        });
+        return done(null, {
+          user: {
+            email: newUser.email,
+          },
+          token,
+        });
+      } catch (error) {
+        return done(error);
+      }
+    }
+  )
+);
 
 passport.serializeUser((user, done) => {
   done(null, user);

@@ -1,9 +1,13 @@
 import { Document, Schema, Model, model } from "mongoose";
 import bcrypt from "bcrypt";
 
+import { AUTH_TYPE, PROVIDER_TYPE } from "../constants";
+
 export interface IUser extends Document {
   email: string;
   password: string;
+  type: AUTH_TYPE;
+  provider?: PROVIDER_TYPE;
   verifyPassword(password: string): boolean;
 }
 
@@ -18,7 +22,22 @@ const UserSchema = new Schema<IUser>(
     },
     password: {
       type: String,
+      required: function () {
+        return this.type === AUTH_TYPE.MANUAL;
+      },
+    },
+    type: {
+      type: String,
       required: true,
+      enum: Object.values(AUTH_TYPE),
+      default: AUTH_TYPE.MANUAL,
+    },
+    provider: {
+      type: String,
+      enum: Object.values(PROVIDER_TYPE),
+      required: function () {
+        return this.type === AUTH_TYPE.SOCIAL;
+      },
     },
   },
   {
@@ -34,9 +53,13 @@ UserSchema.methods.generateHash = async (password: string) => {
 };
 
 UserSchema.methods.verifyPassword = async function (password: string) {
-  const user: IUser = this;
-  if (user) {
-    return await bcrypt.compare(password, user.password);
+  try {
+    const user: IUser = this;
+    if (user) {
+      return await bcrypt.compare(password, user.password);
+    }
+  } catch (err) {
+    console.log(err);
   }
 };
 
