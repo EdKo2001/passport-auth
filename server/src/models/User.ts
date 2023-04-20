@@ -60,6 +60,7 @@ UserSchema.methods.verifyPassword = async function (password: string) {
     }
   } catch (err) {
     console.log(err);
+    return;
   }
 };
 
