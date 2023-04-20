@@ -20,6 +20,10 @@ const Login = () => {
       dispatch(setToken(userData.token));
       dispatch(setUserData(userData.user));
     });
+    window.addEventListener("userError", (e) => {
+      const errorMessage = e.detail.text;
+      setTimeout(() => alert(errorMessage), 100);
+    });
   };
 
   const facebook = () => {
@@ -69,16 +73,16 @@ const Login = () => {
     await axios
       .post(`${process.env.REACT_APP_API_URL}/auth/register`, formData)
       .then((res) => {
-        const user = res.data.user;
-        const token = res.data.token;
-        localStorage.setItem("token", token);
-        dispatch(setToken(token));
-        dispatch(setAuth(true));
-        dispatch(
-          setUserData({
-            email: user.email,
-          })
-        );
+        // const user = res.data.user;
+        // const token = res.data.token;
+        // localStorage.setItem("token", token);
+        // dispatch(setToken(token));
+        // dispatch(setAuth(true));
+        // dispatch(
+        //   setUserData({
+        //     email: user.email,
+        //   })
+        // );
         e.target.reset();
       })
       .catch((err) => console.error(err));

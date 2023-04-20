@@ -13,6 +13,8 @@ import Home from "./pages/Home";
 import Post from "./pages/Post";
 import Login from "./pages/Login";
 import LoginSuccess from "./pages/LoginSuccess";
+import RegisterConfirm from "./pages/RegisterConfirm";
+import RegisterError from "./pages/RegisterError";
 
 import Navbar from "./components/Navbar";
 
@@ -66,6 +68,8 @@ const App = () => {
             path="/login"
             element={isAuth ? <Navigate to="/" /> : <Login />}
           />
+          <Route exact path="/register/confirm" element={<RegisterConfirm />} />
+          <Route exact path="/register/error" element={<RegisterError />} />
           <Route exact path="/login/success" element={<LoginSuccess />} />
           <Route
             exact
