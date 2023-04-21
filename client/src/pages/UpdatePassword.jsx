@@ -22,7 +22,7 @@ const ResetPassword = () => {
     const token = urlParams.get("token");
 
     await axios
-      .post(
+      .put(
         `${process.env.REACT_APP_API_URL}/auth/update-password/${token}`,
         formData
       )
