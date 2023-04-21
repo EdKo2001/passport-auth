@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import Avatar from "react-avatar";
 import { useDispatch } from "react-redux";
 
 import { setAuth, setToken, setUserData } from "../features/auth/authSlice";
@@ -32,7 +31,7 @@ const Navbar = ({ user }) => {
         <ul className="list">
           {user?.photos?.[0]?.value && (
             <li className="listItem">
-              <Avatar
+              <img
                 src={user.photos[0].value}
                 alt={user.displayName ?? user.email}
                 className="avatar"
