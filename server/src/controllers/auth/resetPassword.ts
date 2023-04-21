@@ -23,9 +23,7 @@ const resetPassword = async (req: Request, res: Response) => {
         .json({ message: "Please confirm your registration." });
     }
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "1m",
-    });
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
 
     const mailOptions = {
       to: user.email,

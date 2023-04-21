@@ -24,7 +24,7 @@ const updatePassword = async (req: Request, res: Response) => {
       if (err.name === "TokenExpiredError") {
         return res.status(401).json({
           message:
-            "The token has been expired, please check your inbox for a new email",
+            "The token has been expired, please reset your password again",
         });
       } else {
         return res.status(404).json({ message: "User not found" });
