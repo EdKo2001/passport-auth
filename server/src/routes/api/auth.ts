@@ -62,7 +62,7 @@ router.post(
   authController.resetPassword
 );
 
-router.post(
+router.put(
   "/update-password/:token",
   updatePasswordValidation,
   authController.updatePassword
