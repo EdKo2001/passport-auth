@@ -6,7 +6,7 @@ const google = (req: Request, res: Response) => {
     const token = req.user.token;
     // res.status(200).json({ user, token });
     res.redirect(
-      `${process.env.CLIENT_ORIGIN}/login/success?user=${JSON.stringify(
+      `${process.env.CLIENT_URL}/login/success?user=${JSON.stringify(
         user
       )}&token=${token}`
     );

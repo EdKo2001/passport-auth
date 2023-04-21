@@ -1,4 +1,5 @@
 import { useReducer } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setAuth, setToken, setUserData } from "../features/auth/authSlice";
 
@@ -72,17 +73,7 @@ const Login = () => {
 
     await axios
       .post(`${process.env.REACT_APP_API_URL}/auth/register`, formData)
-      .then((res) => {
-        // const user = res.data.user;
-        // const token = res.data.token;
-        // localStorage.setItem("token", token);
-        // dispatch(setToken(token));
-        // dispatch(setAuth(true));
-        // dispatch(
-        //   setUserData({
-        //     email: user.email,
-        //   })
-        // );
+      .then(() => {
         e.target.reset();
       })
       .catch((err) => console.error(err));
@@ -120,6 +111,9 @@ const Login = () => {
               onChange={(e) => setFormData({ password: e.target.value })}
               required
             />
+            <Link to="/reset-password" style={{ marginBottom: 15 }}>
+              Reset password
+            </Link>
             <button className="submit">Login</button>
           </form>
           <div className="center" style={{ margin: "20px 0" }}>

@@ -17,12 +17,12 @@ const register = (req: Request, res: Response, next: NextFunction) => {
         return res.status(400).json({ message: info?.message });
       }
       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-        expiresIn: "1m",
+        expiresIn: "1h",
       });
       const mailOptions = {
         to: user.email,
         subject: "Please confirm your account",
-        html: `<p>Dear user,</p><p>Please click the following link to confirm your registration:</p><p><a href="${process.env.CLIENT_ORIGIN}/register/confirm?token=${token}">Confirm Account</a></p>`,
+        html: `<p>Dear user,</p><p>Please click the following link to confirm your registration:</p><p><a href="${process.env.CLIENT_URL}/register/confirm?token=${token}">Confirm Account</a></p>`,
       };
       transporter
         .sendMail(mailOptions)

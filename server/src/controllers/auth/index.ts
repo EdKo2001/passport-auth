@@ -7,6 +7,8 @@ import register from "./register";
 import login from "./login";
 import user from "./user";
 import confirm from "./confirm";
+import resetPassword from "./resetPassword";
+import updatePassword from "./updatePassword";
 
 const authController = {
   logout,
@@ -18,6 +20,8 @@ const authController = {
   login,
   user,
   confirm,
+  resetPassword,
+  updatePassword,
 };
 
 export default authController;

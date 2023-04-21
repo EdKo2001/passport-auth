@@ -1,1 +1,5 @@
-export { default as authValidation } from "./auth";
+export {
+  default as authValidation,
+  resetPasswordValidation,
+  updatePasswordValidation,
+} from "./auth";

@@ -3,7 +3,11 @@ import passport from "passport";
 
 import { authController } from "../../controllers";
 
-import { authValidation } from "../../validations";
+import {
+  authValidation,
+  resetPasswordValidation,
+  updatePasswordValidation,
+} from "../../validations";
 
 import { handleValidationErrors } from "../../utils";
 
@@ -14,8 +18,7 @@ const googleAuth = passport.authenticate("google", {
 });
 const googleCallback = passport.authenticate("google", {
   session: false,
-  failureRedirect:
-    "http://localhost:3000/register/error?text=Please confirm your registration.",
+  failureRedirect: `${process.env.CLIENT_URL}/register/error?text=Please confirm your registration.`,
 });
 
 const facebookAuth = passport.authenticate("facebook");
@@ -51,6 +54,18 @@ router.post(
   authValidation,
   handleValidationErrors,
   authController.login
+);
+
+router.post(
+  "/reset-password",
+  resetPasswordValidation,
+  authController.resetPassword
+);
+
+router.post(
+  "/update-password/:token",
+  updatePasswordValidation,
+  authController.updatePassword
 );
 
 router.get("/user", authController.user);
@@ -92,6 +107,14 @@ router.all("/login", (req, res, next) => {
 });
 
 router.all("/user", (req, res, next) => {
+  res.status(405).json("Method Not Allowed");
+});
+
+router.all("/reset-password", (req, res, next) => {
+  res.status(405).json("Method Not Allowed");
+});
+
+router.all("/update-password/:token", (req, res, next) => {
   res.status(405).json("Method Not Allowed");
 });
 

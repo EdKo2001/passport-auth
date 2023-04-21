@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Avatar from "react-avatar";
 import { useDispatch } from "react-redux";
+
 import { setAuth, setToken, setUserData } from "../features/auth/authSlice";
 
 import axios from "../utils/axios.jsx";
@@ -24,7 +25,7 @@ const Navbar = ({ user }) => {
     <div className="navbar">
       <span className="logo">
         <Link className="link" to="/">
-          Lama App
+          Passport Auth App
         </Link>
       </span>
       {Object.keys(user).length > 0 ? (

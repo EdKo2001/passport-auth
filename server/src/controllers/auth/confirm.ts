@@ -17,7 +17,7 @@ const confirm = async (req: Request, res: Response) => {
           );
         } catch (err) {
           if (err.name === "TokenExpiredError") {
-            return res.status(404).json({
+            return res.status(401).json({
               message:
                 "The token has been expired, please check your inbox for a new email",
             });
